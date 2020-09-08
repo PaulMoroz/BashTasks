@@ -9,20 +9,14 @@ baseDir="/home/neo"
 #Finally, save the file to the flash drive after making certain the flash drive has properly mounted by parsing the output of df. 
 #Note that the flash drive must be unmounted before it is removed.
 
-print(){
-    echo $1
-    cd $1
-    echo "============">>$writeFile
-    pwd>>$writeFile
-    echo "============">>$writeFile
-    ls>>$writeFile
-    for f in $("ls -R"); do
-    if [ -d "$f" ]; then
-        print $1"/"$f
-    fi
-done
-}
+find "/home/neo" -type d > "$writeFile"
 
-print $baseDir
-#zipping
-gzip $writeFile
+read -r -s -p $'{lug in USB drive and press ENTER to continue...'
+
+
+if ["/dev/sdb1/"]
+then
+    cp $writeFile "/dev/sdb1/backup.h"
+else
+    echo "You didn't plug USB drive"
+fi
